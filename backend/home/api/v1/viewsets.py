@@ -1,3 +1,7 @@
+from rest_framework import viewsets
+from home.models import Addressacgildekxz
+from .serializers import AddressacgildekxzSerializer
+from rest_framework import authentication
 from rest_framework.authtoken.serializers import AuthTokenSerializer
 from rest_framework.viewsets import ModelViewSet, ViewSet
 from rest_framework.authtoken.models import Token
@@ -28,3 +32,8 @@ class LoginViewSet(ViewSet):
         token, created = Token.objects.get_or_create(user=user)
         user_serializer = UserSerializer(user)
         return Response({"token": token.key, "user": user_serializer.data})
+
+class AddressacgildekxzViewSet(viewsets.ModelViewSet):
+    serializer_class = AddressacgildekxzSerializer
+    authentication_classes = (authentication.SessionAuthentication, authentication.TokenAuthentication)
+    queryset = Addressacgildekxz.objects.all()
